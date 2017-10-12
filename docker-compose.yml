@@ -17,6 +17,7 @@ services:
       dockerfile: "$PWD/aile-alpine.dockerfile"
     ports:
     - 8000:8000
+    - 8888:8888
     volumes:
     # - "${PWD}:/app/code" # change it for "$PWD:/app", if you want to share the source code with the container
     - "./shared/data:/data"
