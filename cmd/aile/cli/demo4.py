@@ -18,27 +18,25 @@ def annotate(page, labels, out_path="/data/annotated/annotated.html"):
         indent = 0
         for i, (fragment, label) in enumerate(
                 zip(page.parsed_body, labels)):
-            if label >= 0:
-                print('<span class="line" style="color:red">')
-            else:
-                print('<span class="line" style="color:black">')
+            #if label >= 0:
+            #    print('<span class="line" style="color:red">')
+            #else:
+            #    print('<span class="line" style="color:black">')
             if isinstance(fragment, hp.HtmlTag):
                 if fragment.tag_type == hp.HtmlTagType.CLOSE_TAG:
                     if match[i] >= 0 and indent > 0:
                         indent -= 1
-                    print('{0:3d}|&lt;/{1}&gt;'.format(label, fragment.tag))
+                    # print('{0:3d}|{1}'.format(label, fragment.tag))
                 else:
-                    print('{0:3d}|&lt;{1}'.format(label, fragment.tag))
+                    # print('{0:3d}|{1}'.format(label, fragment.tag))
                     for k,v in fragment.attributes.iteritems():
-                        print(' {0}="{1}"'.format(k, v))
+                        print(u' {0}="{1}"'.format(k, v))
                     if fragment.tag_type == hp.HtmlTagType.UNPAIRED_TAG:
                         print('/')
                     if match[i] >= 0:
                         indent += 1
             else:
-                print('{0:3d}|{1}'.format(
-                    label,
-                    cgi.escape(page.body[fragment.start:fragment.end].strip())))
+                print(u'{0:3d}|{1}'.format(label, cgi.escape(page.body[fragment.start:fragment.end].strip())))
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:

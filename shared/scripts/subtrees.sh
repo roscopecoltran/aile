@@ -6,7 +6,7 @@ git subtree add --prefix shared/docker/templates/alpine/cpp_c/glibc https://gith
 git subtree add --prefix shared/docker/templates/alpine/py3/flask-restplus-server https://github.com/frol/flask-restplus-server-example master --squash
 git subtree add --prefix shared/docker/templates/alpine/java/oraclejdk8 https://github.com/frol/docker-alpine-oraclejdk8 master --squash
 git subtree add --prefix shared/docker/templates/alpine/cpp_c/gcc https://github.com/frol/docker-alpine-gcc master --squash
-git subtree add --prefix shared/docker/templates/alpine/py3-machinelearning https://github.com/frol/docker-alpine-python-machinelearning master --squash
+git subtree add --prefix shared/docker/templates/alpine/py3/machinelearning https://github.com/frol/docker-alpine-python-machinelearning master --squash
 git subtree add --prefix shared/docker/templates/alpine/base/fpc https://github.com/frol/docker-alpine-fpc master --squash
 git subtree add --prefix shared/docker/templates/alpine/py3/base https://github.com/frol/docker-alpine-python3 master --squash
 git subtree add --prefix shared/docker/templates/alpine/nim/base https://github.com/frol/docker-alpine-nim master --squash
