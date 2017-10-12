@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import time
 import sys
 
@@ -12,7 +14,7 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         out_path = sys.argv[2]
     else:
-        out_path = './slybot-project'
+        out_path = '/data/projects/slybot-project'
 
     print 'Downloading URL...',
     t1 = time.clock()

@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import time
 import sys
 import codecs
@@ -10,7 +12,7 @@ import aile.kernel
 import aile.ptree
 
 
-def annotate(page, labels, out_path="annotated.html"):
+def annotate(page, labels, out_path="/data/annotated/annotated.html"):
     match = aile.ptree.match_fragments(page.parsed_body)
     with codecs.open(out_path, 'w', encoding='utf-8') as out:
         out.write("""

@@ -27,8 +27,8 @@ setup_options = dict(
         'pulp'
     ],
     dependency_links = [
-        'git+https://github.com/scrapinghub/portia.git@multiple-item-extraction#egg=slyd&subdirectory=slyd',
-        'git+https://github.com/scrapinghub/portia.git@multiple-item-extraction#egg=slybot&subdirectory=slybot'
+        'git+https://github.com/scrapinghub/portia.git@slybot-0.12.0#egg=slyd&subdirectory=slyd',
+        'git+https://github.com/scrapinghub/portia.git@nui-develop-backup#egg=slybot&subdirectory=slybot'
     ],
     tests_requires = [
         'pytest'
