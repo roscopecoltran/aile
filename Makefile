@@ -9,6 +9,6 @@ get-addons:
 	@chmod a+x ./shared/scripts/subtrees.sh
 	@./shared/scripts/subtrees.sh
 	# Fetch all the binary files in the new clone
-	@export GIT_SSL_NO_VERIFY=1 && git lfs pull
+	#@export GIT_SSL_NO_VERIFY=1 && git lfs pull
 	# Reinstate smudge
-	@git lfs install --force
+	#@git lfs install --force
