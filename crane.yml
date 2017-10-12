@@ -32,8 +32,8 @@ services:
     container_name: scraphub-aile-dev-py3
     env_file: .env
     build:
-      context: docker/templates/alpine/py3-machinelearning
-      file: py3-machinelearning-alpine.dockerfile
+      context: docker/templates/alpine/py3/machinelearning
+      file: Dockerfile
       # build-arg: []
     # add-host:
     # hostname:
@@ -59,8 +59,8 @@ services:
     container_name: scraphub-aile-dev-py2
     env_file: .env
     build:
-      context: docker/templates/alpine/py2-machinelearning
-      file: py2-machinelearning-alpine.dockerfile
+      context: docker/templates/alpine/py2/machinelearning
+      file: Dockerfile
       # build-arg: []
     # add-host:
     # hostname:
