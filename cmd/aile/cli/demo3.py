@@ -10,11 +10,16 @@ import aile.ptree
 import aile.slybot_project
 
 if __name__ == '__main__':
-    url = sys.argv[1]
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+    else:
+        url = "https://news.ycombinator.com"
+
     if len(sys.argv) > 2:
         out_path = sys.argv[2]
     else:
         out_path = '/data/projects/slybot-project'
+    print("out_path: ", out_path)
 
     print 'Downloading URL...',
     t1 = time.clock()

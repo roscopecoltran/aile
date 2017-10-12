@@ -15,73 +15,38 @@ import aile.ptree
 def annotate(page, labels, out_path="/data/annotated/annotated.html"):
     match = aile.ptree.match_fragments(page.parsed_body)
     with codecs.open(out_path, 'w', encoding='utf-8') as out:
-        out.write("""
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<style>
-    pre {
-      counter-reset: code;
-      padding-left: 30px;
-    }
-    .line {
-      counter-increment: code;
-    }
-    .line:before {
-      content: counter(code);
-      float: left;
-      margin-left: -30px;
-      width: 25px;
-      text-align: right;
-    }
-</style>
-</head>
-<body>
-<pre>
-""")
         indent = 0
-        def write(s):
-            out.write(indent*'    ')
-            out.write(s)
-
         for i, (fragment, label) in enumerate(
                 zip(page.parsed_body, labels)):
             if label >= 0:
-                out.write('<span class="line" style="color:red">')
+                print('<span class="line" style="color:red">')
             else:
-                out.write('<span class="line" style="color:black">')
+                print('<span class="line" style="color:black">')
             if isinstance(fragment, hp.HtmlTag):
                 if fragment.tag_type == hp.HtmlTagType.CLOSE_TAG:
                     if match[i] >= 0 and indent > 0:
                         indent -= 1
-                    write(u'{0:3d}|&lt;/{1}&gt;'.format(label, fragment.tag))
+                    print('{0:3d}|&lt;/{1}&gt;'.format(label, fragment.tag))
                 else:
-                    write(u'{0:3d}|&lt;{1}'.format(label, fragment.tag))
+                    print('{0:3d}|&lt;{1}'.format(label, fragment.tag))
                     for k,v in fragment.attributes.iteritems():
-                        out.write(u' {0}="{1}"'.format(k, v))
+                        print(' {0}="{1}"'.format(k, v))
                     if fragment.tag_type == hp.HtmlTagType.UNPAIRED_TAG:
-                        out.write('/')
-                    out.write('&gt;')
+                        print('/')
                     if match[i] >= 0:
                         indent += 1
             else:
-                write(u'{0:3d}|{1}'.format(
+                print('{0:3d}|{1}'.format(
                     label,
                     cgi.escape(page.body[fragment.start:fragment.end].strip())))
-            out.write('</span>\n')
-        out.write("""
-</pre>
-</body>
-</html>""")
-
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        url = sys.argv[1]
+	    url = sys.argv[1]
     else:
-        url = "https://news.ycombinator.com"
+    	url = "https://news.ycombinator.com"
     print("url: ", url)
-        
+
     print 'Downloading URL...',
     t1 = time.clock()
     page = hp.url_to_page(url)
