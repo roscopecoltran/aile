@@ -1,0 +1,9 @@
+*.pyc
+*.html
+*.png
+*.so
+*.c
+*.egg-info/
+*#
+*~
+build/

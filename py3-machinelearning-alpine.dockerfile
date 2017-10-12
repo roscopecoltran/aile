@@ -1,8 +1,13 @@
-# FROM frolvlad/alpine-python2
 FROM frolvlad/alpine-glibc:alpine-3.6
+MAINTAINER Rosco Pecoltran <https://github.com/roscopecoltran>
 
-ENV CONDA_DIR="/opt/conda"
-ENV PATH="$CONDA_DIR/bin:$PATH"
+# build: docker build -t py3-machinelearning:alpine -f py3-machinelearning-alpine.dockerfile --no-cache .
+# run: docker run --rm -ti -p 2312:2312 -v `pwd`:/app py3-machinelearning:alpine
+
+ENV CONDA_DIR="/opt/conda" \
+    PATH="$CONDA_DIR/bin:$PATH" \
+    CFLAGS=-I/usr/lib/python2.7/site-packages/numpy/core/include \
+    PYTHONDONTWRITEBYTECODE=${PYTHONDONTWRITEBYTECODE:-"1"}
 
 # Install conda
 RUN CONDA_VERSION="4.0.5" && \
@@ -46,10 +51,7 @@ RUN apk add --no-cache libstdc++ lapack-dev bash nano cython cython-dev gcc musl
 COPY . /app
 WORKDIR /app
 
-ENV CFLAGS=-I/usr/lib/python2.7/site-packages/numpy/core/include \
-    PYTHONDONTWRITEBYTECODE=${PYTHONDONTWRITEBYTECODE:-"1"}
-
-RUN pip install -r requirements.txt \
-    && python setup.py develop
+VOLUNES ["/data"]
+EXPOSE 2312
 
 CMD ["/bin/bash"]

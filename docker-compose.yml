@@ -1,0 +1,42 @@
+---
+version: '2.1'
+services:
+
+  applications:
+    image: tianon/true
+    volumes:
+    - "./shared/data:/data"
+    - "./shared/conf.d:/app/conf.d"
+
+  aile:
+    container_name: scraphub-aile
+    build:
+      context: .
+      dockerfile: aile-alpine.dockerfile
+    ports:
+    - 8000:8000
+    volumes:
+    - "./shared/data:/data"
+    - "./shared/conf.d:/app/conf.d"
+
+  py3-ml:
+    container_name: scraphub-aile
+    build:
+      context: .
+      dockerfile: aile-alpine.dockerfile
+    ports:
+    - 8000:8000
+    volumes:
+    - "./shared/data:/data"
+    - "./shared/conf.d:/app/conf.d"
+
+  py2-ml:
+    container_name: scraphub-aile
+    build:
+      context: .
+      dockerfile: aile-alpine.dockerfile
+    ports:
+    - 8000:8000
+    volumes:
+    - "./shared/data:/data"
+    - "./shared/conf.d:/app/conf.d"
