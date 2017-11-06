@@ -23,8 +23,16 @@ ENV CONDA_DIR="/opt/conda" \
     CFLAGS=-I/usr/lib/python2.7/site-packages/numpy/core/include \
     PYTHONDONTWRITEBYTECODE=${PYTHONDONTWRITEBYTECODE:-"1"}
 
+# pip install -U git+https://github.com/etetoolkit/ete.git@2.3
+# http://etetoolkit.org/download/
+# conda install pyqt=4 
+# conda install -c etetoolkit ete2
+# apk add --no-cache --allow-untrusted --arch x86 --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing py-qt
+# sed -i -e 's/v3\.6/edge/g' /etc/apk/repositories
+# setup-apkrepos
 # echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
 # Install conda
+# export DISPLAY=192.168.0.2:0
 RUN \
         apk add --no-cache --virtual=.build-dependencies wget ca-certificates bash && \
     \
@@ -59,6 +67,8 @@ RUN apk add --no-cache ${APK_RUNTIME} && \
     \
         apk add --no-cache --virtual=.build-dependencies ${APK_BUILD} && \
     \
+        apk add --no-cache --allow-untrusted --arch x86 --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing py-qt && \
+    \
         ln -s locale.h /usr/include/xlocale.h && \
     \
         pip install --upgrade pip setuptools && \   
@@ -77,8 +87,11 @@ VOLUME ["/data"]
 EXPOSE 2312
 
 RUN python setup.py develop
+RUN conda install pyqt=4 && \ 
+    conda install -c etetoolkit ete2
 
 CMD ["/bin/bash"]
 
 ### SNIPPETS #########################################################################################################
-# run (with x11): docker run --rm -it -e DISPLAY -v $(pwd):/app -v /tmp/.X11-unix:/tmp/.X11-unix:ro -v $XAUTHORITY:/root/.Xauthority --net=host aile:alpine
+# run (with x11): docker run --rm -it -e DISPLAY=$(ifconfig en0 | grep inet | awk '$1=="inet" {print $2}'):0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro --net=host aile:alpine
+# docker run -e DISPLAY=192.168.0.2:0 --privileged gns3/xeyes

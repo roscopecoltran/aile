@@ -10,14 +10,20 @@ services:
     - "./shared/data:/data"
     - "./shared/conf.d:/app/conf.d"
 
+  # https://github.com/abaelhe/ScrapyAI/tree/251a98a762db470a7a191311193513350218dbba
+  # https://fredrikaverpil.github.io/2016/07/31/docker-for-mac-and-gui-applications/
   aile:
-    container_name: scraphub-scraphub-aile
+    container_name: scraphub-aile
     build:
       context: .
       dockerfile: "$PWD/aile-alpine.dockerfile"
     ports:
     - 8000:8000
     - 8888:8888
+    env_file: .env
+    environment:
+    - DISPLAY=192.168.0.2:0
+    network_mode: "host"
     volumes:
     # - "${PWD}:/app/code" # change it for "$PWD:/app", if you want to share the source code with the container
     - "./shared/data:/data"
@@ -25,15 +31,16 @@ services:
     - "./shared/data/annotated:/data/annotated"
     - "./shared/data/projects:/data/projects"
     - "./cmd:/app/cmd"
-    #- "/tmp/.X11-unix:/tmp/.X11-unix:ro"
-    #- "$XAUTHORITY:/root/.Xauthority"
+    - "/tmp/.X11-unix:/tmp/.X11-unix"
+    # - "$XAUTHORITY:/root/.Xauthority"
     # demo1.py https://news.ycombinator.com
     # demo3.py https://news.ycombinator.com
     # command: ["server.py"]
     # command: ["demo1.py","https://news.ycombinator.com"]
     # command: ["demo2.py","https://news.ycombinator.com"]
     # command: ["demo3.py","https://news.ycombinator.com"]
-    command: ["/bin/bash"]
+    command: ["demo2.py"]
+    #command: ["/bin/bash"]
 
   py3-ml:
     container_name: scraphub-aile-dev-py3

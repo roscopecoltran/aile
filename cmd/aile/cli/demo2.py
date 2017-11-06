@@ -5,6 +5,7 @@ import sys
 
 import scrapely.htmlpage as hp
 import numpy as np
+
 import ete2
 import matplotlib.pyplot as plt
 

@@ -44,7 +44,7 @@ services:
     rm: true
     interactive: true
     tty: true
-    workdir: /app/src
+    workdir: /app
     ports:
     - 8001:8000
     volume:
@@ -73,7 +73,7 @@ services:
     tty: true
     ports:
     - 8002:8000
-    workdir: /app/src
+    workdir: /app
     volume:
     - "$PWD:/app/code" # change it for "$PWD:/app", if you want to share the source code with the container
     - "./shared/data:/data"
@@ -98,6 +98,6 @@ accelerated-mounts:
   "$XAUTHORITY:/root/.Xauthority":
     uid: 1000
     gid: 1000
-  "$PWD:/app/src":
+  "$PWD:/app":
     uid: 1000
     gid: 1000
